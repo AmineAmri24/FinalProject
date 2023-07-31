@@ -5,7 +5,7 @@ const {Schema , model} = mongoose
 const UserSchema = new Schema ({
     name : {
         type : String,
-        required : true
+        required : true,
     },
     email : {
         type : String,
@@ -27,6 +27,11 @@ const UserSchema = new Schema ({
     phone : {
         type : Number,
     },
+
+    // type: { 
+    //     type: String, 
+    //     enum: ['user', 'admin'], 
+    //     default: 'user' },
 });
 
 module.exports = User = model("user", UserSchema);

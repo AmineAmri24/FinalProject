@@ -2,24 +2,20 @@ const mongoose = require("mongoose");
 
 const {Schema , model} = mongoose
 
-const shiftSchema = new Schema ({
-    Department : {
-        type : String,
-        required : true,
-    },
-    Identity : {
+const adminSchema = new Schema ({
+   
+    
+    email : {
         type : String,
         required: true,
         unique: true, 
     },
 
-    shift : {
+       password : {
         type : String,
         required: true,
+        nunique: true,
     },
 
-
-    
-});
-
-module.exports = shift = model("shift", shiftSchema);
+})
+module.exports = admin = model("admin", adminSchema);

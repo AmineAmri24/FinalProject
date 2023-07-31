@@ -31,7 +31,7 @@ router.get('/:id', async(req,res) =>{
 
 // add request 
 
-router.post('/request', async(req,res)=> {
+router.post('/addrequest', async(req,res)=> {
     try {
         const {requestSubject, fullName, role, requestDetails} = req.body;
         const newRequest = new request({requestSubject, fullName, role, requestDetails});
