@@ -22,7 +22,6 @@ router.get('/getall', async(req,res)=>{
 
 
 
-
 // register
 
 router.post ('/register',registerValidation(), validation, register )
@@ -40,6 +39,18 @@ router.post('/login', loginValidation(), validation, login)
 router.get('/current', isAuth,(req,res) => {
     res.send("you are authorized")
 })
+
+// delete user
+
+router.delete('/:_id', async (req,res) => {
+    try {
+        const {_id} = req.params;
+        await user.findOneAndDelete({_id});
+        res.status (200).send ({msg : "the user is deleted .."})
+    } catch (error){
+        res.status (400).send ({msg : "cannot delete user", error});
+    }
+});
 
 
 

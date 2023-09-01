@@ -4,7 +4,7 @@ const express = require("express");
 
 const { registerValidation, validation, loginValidation } = require("../middleware/validator");
 const router = express.Router();
-const isAuth = require("../middleware/isAuth");
+const isAuthAdmin = require("../middleware/isAdmin");
 const { registerAdmin, loginAdmin } = require("../Controllers/admin");
 
 
@@ -24,7 +24,7 @@ router.post('/loginadmin', loginValidation(), validation, loginAdmin)
 
 // current user 
 
-router.get('/currentadmin', isAuth,(req,res) => {
+router.get('/currentadmin', isAuthAdmin,(req,res) => {
     res.send("you are authorized")
 })
 

@@ -12,7 +12,7 @@ const isAuthAdmin = async(req, res, next) => {
 
         const decoded = jwt.verify(token, process.env.SECRET_KEY)
         const foundAdmin = await admin.findOne({_id : decoded.id})
-        if(!foundUser){
+        if(!foundAdmin){
             return res.status(401).send({error: [{msg : "not authorized"}]})
         }
         req.admin = foundAdmin;

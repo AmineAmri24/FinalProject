@@ -58,15 +58,38 @@ router.delete('/:_id', async (req,res)=>{
 
 // edit request
 
-router.put('/:_id', async(req,res)=>{
+
+
+router.put("/:id", async (req, res) => {
     try {
-        const {_id} = req.params;
-        const result = await request.updateOne({_id}, {$set : {...req.body}});
-        res.status(200).send ({msg:"the request is updated "})   
+        let newRequest = await request.findById(req.params.id);
+       
+        const data = {
+            requestSubject: req.body.requestSubject || newRequest.requestSubject,
+            fullName: req.body.fullName || newRequest.fullName,
+            role: req.body.role|| newRequest.role,
+            requestDetails: req.body.requestDetails || newRequest.requestDetails,
+           
+        };
+        updateRequest= await request.findByIdAndUpdate(req.params.id, data, {
+            new: true, });
+
+            res.status(200).send({ msg: "request updated", updateRequest});
     } catch (error) {
-       res.status(400).send({msg : "cannot update the request", error}) 
+        res.status(400).send({ msg: "can not update this request", error});
+
     }
-})
+});
+
+// router.put('/:_id', async(req,res)=>{
+//     try {
+//         const {_id} = req.params;
+//         const result = await request.updateOne({_id}, {$set : {...req.body}});
+//         res.status(200).send ({msg:"the request is updated "})   
+//     } catch (error) {
+//        res.status(400).send({msg : "cannot update the request", error}) 
+//     }
+// })
 
 module.exports = router ; 
 
